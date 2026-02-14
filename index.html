@@ -1,30 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-<link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRON73BNMExXbxLR1IFOSVoC5anfrfZ1j7rFc_FXewWag&s" >
-    <title>BMI Calculator</title>
-</head>
-<body>
-    <h1>BMI Calculator</h1>
-    <div name="content-box">
-        <label for="height"><b>Height: </b></label>
-        <select name="height-unit" id="height-unit">
-            <option value="m" id="m">m</option>
-            <option value="cm" id="cm">cm</option>
-        </select>
-        <input type="number" name="height" id="height">
-        <br> <br>
-        <label for="weight"><b>Weight: </b></label>
-        <input type="number" name="weight" id="weight">
-        <label for="kgs"><b>KGs</b></label>
-    </div>
-    <br>
-    <button type="submit" onclick="calculateBMI()">submit</button><br>
-    <br> 
-    <div > <b> BMI: <span id="result">--</span></b> </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator Pro</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="card">
+        <header class="card__header">
+          <p class="eyebrow">Health Tool</p>
+          <h1>BMI Calculator</h1>
+          <p class="subtitle">
+            Instant body mass index check with unit conversion, category insights, and recent history.
+          </p>
+        </header>
+
+        <div class="unit-toggle" role="tablist" aria-label="Unit system">
+          <button class="unit-btn active" id="metric-btn" role="tab" aria-selected="true" data-system="metric">
+            Metric
+          </button>
+          <button class="unit-btn" id="imperial-btn" role="tab" aria-selected="false" data-system="imperial">
+            Imperial
+          </button>
+        </div>
+
+        <form id="bmi-form" novalidate>
+          <div class="field-grid">
+            <label class="field">
+              <span id="height-label">Height (cm)</span>
+              <input id="height" name="height" type="number" step="any" min="1" placeholder="e.g., 175" required />
+            </label>
+
+            <label class="field">
+              <span id="weight-label">Weight (kg)</span>
+              <input id="weight" name="weight" type="number" step="any" min="1" placeholder="e.g., 70" required />
+            </label>
+
+            <label class="field">
+              <span>Age (optional)</span>
+              <input id="age" name="age" type="number" min="2" max="120" placeholder="e.g., 28" />
+            </label>
+
+            <label class="field">
+              <span>Sex (optional)</span>
+              <select id="sex" name="sex">
+                <option value="">Prefer not to say</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+              </select>
+            </label>
+          </div>
+
+          <p id="error" class="error" role="alert" aria-live="polite"></p>
+
+          <div class="actions">
+            <button type="submit" class="btn btn--primary">Calculate BMI</button>
+            <button type="button" id="reset" class="btn btn--ghost">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card card--result" aria-live="polite">
+        <h2>Your Result</h2>
+        <p class="bmi-value" id="bmi-value">--</p>
+        <p class="bmi-category" id="bmi-category">Enter values and calculate.</p>
+
+        <div class="meter" aria-hidden="true">
+          <div id="meter-indicator" class="meter__indicator"></div>
+        </div>
+        <ul class="meter-scale" aria-hidden="true">
+          <li>Under 18.5</li>
+          <li>18.5–24.9</li>
+          <li>25–29.9</li>
+          <li>30+</li>
+        </ul>
+
+        <p id="healthy-range" class="healthy-range">Healthy weight range will appear here.</p>
+      </section>
+
+      <section class="card history">
+        <div class="history__header">
+          <h2>Recent Calculations</h2>
+          <button id="clear-history" class="btn btn--link" type="button">Clear</button>
+        </div>
+        <ul id="history-list" class="history__list">
+          <li class="muted">No saved calculations yet.</li>
+        </ul>
+      </section>
+    </main>
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
